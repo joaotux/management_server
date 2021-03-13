@@ -1,0 +1,1 @@
+INSERT INTO company_type VALUES (1, 'Outras'), (2, 'Mecânica'), (3, 'Assitência');
