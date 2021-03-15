@@ -72,7 +72,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `managementdb`.`provider` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `description` VARCHAR(250) NOT NULL,
+  `name` VARCHAR(250) NOT NULL,
   `id_comp` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_provider_company1_idx` (`id_comp` ASC),
