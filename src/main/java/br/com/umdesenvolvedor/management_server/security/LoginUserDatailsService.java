@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import br.com.umdesenvolvedor.management_server.repository.UserRepository;
-import br.com.umdesenvolvedor.management_server.model.user.User;
+import br.com.umdesenvolvedor.management_server.model.User;
 
 @Component
 public class LoginUserDatailsService implements UserDetailsService {

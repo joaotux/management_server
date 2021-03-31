@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.umdesenvolvedor.management_server.dto.user.UserCreateDTO;
 import br.com.umdesenvolvedor.management_server.dto.user.UserDTO;
 import br.com.umdesenvolvedor.management_server.exception.BusinessException;
-import br.com.umdesenvolvedor.management_server.model.user.User;
+import br.com.umdesenvolvedor.management_server.model.User;
 import br.com.umdesenvolvedor.management_server.repository.UserRepository;
 
 @Service

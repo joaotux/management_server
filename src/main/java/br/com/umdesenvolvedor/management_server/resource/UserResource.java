@@ -22,7 +22,7 @@ import br.com.umdesenvolvedor.management_server.dto.user.UserCreateDTO;
 import br.com.umdesenvolvedor.management_server.dto.user.UserDTO;
 import br.com.umdesenvolvedor.management_server.exception.ApiException;
 import br.com.umdesenvolvedor.management_server.exception.BusinessException;
-import br.com.umdesenvolvedor.management_server.model.user.User;
+import br.com.umdesenvolvedor.management_server.model.User;
 import br.com.umdesenvolvedor.management_server.security.JwtDecoder;
 import br.com.umdesenvolvedor.management_server.service.UserService;
 

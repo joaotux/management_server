@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +40,11 @@ public class ProductResource {
         return service.save(product);
     }
 
-    @GetMapping
-    public List<Product> findAll(@RequestHeader (name = "Authorization") String token) {
+    @GetMapping(value = {"list", "list/{query}"})
+    public Page<Product> findAll(@PathVariable(required = false) String query, Pageable pageable, @RequestHeader (name = "Authorization") String token) {
         String uuid = JwtDecoder.getUUID(token);
-        return service.findAll(uuid);
+        query = query == null ? "%" : query;
+        return service.findAll(uuid, query, pageable);
     }
 
     @GetMapping("{id}")

@@ -1,4 +1,4 @@
-package br.com.umdesenvolvedor.management_server.model.user;
+package br.com.umdesenvolvedor.management_server.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

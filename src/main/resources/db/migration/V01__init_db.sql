@@ -7,6 +7,10 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema managementdb
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema managementdb
+-- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `managementdb` ;
 USE `managementdb` ;
 
@@ -68,18 +72,97 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `managementdb`.`city`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `managementdb`.`city` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `code` INT NOT NULL,
+  `name` VARCHAR(250) NOT NULL,
+  `uf` VARCHAR(2) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `managementdb`.`state`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `managementdb`.`state` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `code_uf` INT NOT NULL,
+  `name` VARCHAR(250) NOT NULL,
+  `uf` VARCHAR(2) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `managementdb`.`address`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `managementdb`.`address` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `street` VARCHAR(250) NULL,
+  `number` VARCHAR(45) NULL,
+  `zip_code` VARCHAR(45) NULL,
+  `district` VARCHAR(250) NULL,
+  `info` VARCHAR(250) NULL,
+  `id_city` INT NULL,
+  `id_stat` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_address_city1_idx` (`id_city` ASC),
+  INDEX `fk_address_state1_idx` (`id_stat` ASC),
+  CONSTRAINT `fk_address_city1`
+    FOREIGN KEY (`id_city`)
+    REFERENCES `managementdb`.`city` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_address_state1`
+    FOREIGN KEY (`id_stat`)
+    REFERENCES `managementdb`.`state` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `managementdb`.`person`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `managementdb`.`person` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `cpfcnpj` VARCHAR(18) NULL,
+  `email` VARCHAR(100) NULL,
+  `id_addr` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_person_address1_idx` (`id_addr` ASC),
+  CONSTRAINT `fk_person_address1`
+    FOREIGN KEY (`id_addr`)
+    REFERENCES `managementdb`.`address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `managementdb`.`provider`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `managementdb`.`provider` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(250) NOT NULL,
+  `active` TINYINT NOT NULL,
+  `fantasy_name` VARCHAR(250) NULL,
   `id_comp` VARCHAR(36) NOT NULL,
+  `id_pers` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_provider_company1_idx` (`id_comp` ASC),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_provider_person1_idx` (`id_pers` ASC),
   CONSTRAINT `fk_provider_company1`
     FOREIGN KEY (`id_comp`)
     REFERENCES `managementdb`.`company` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_provider_person1`
+    FOREIGN KEY (`id_pers`)
+    REFERENCES `managementdb`.`person` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -184,6 +267,24 @@ CREATE TABLE IF NOT EXISTS `managementdb`.`stoke_moviment` (
   CONSTRAINT `fk_stoke_moviment_product_stock1`
     FOREIGN KEY (`id_prod_stoc`)
     REFERENCES `managementdb`.`product_stock` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `managementdb`.`phone`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `managementdb`.`phone` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `number` VARCHAR(40) NOT NULL,
+  `type` VARCHAR(10) NOT NULL,
+  `id_pers` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_phone_person1_idx` (`id_pers` ASC),
+  CONSTRAINT `fk_phone_person1`
+    FOREIGN KEY (`id_pers`)
+    REFERENCES `managementdb`.`person` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

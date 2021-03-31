@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import br.com.umdesenvolvedor.management_server.enumerated.EnumSecurity;
-import br.com.umdesenvolvedor.management_server.model.user.User;
+import br.com.umdesenvolvedor.management_server.model.User;
 import br.com.umdesenvolvedor.management_server.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

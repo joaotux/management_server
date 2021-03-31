@@ -8,14 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.umdesenvolvedor.management_server.model.EntityAbstract;
 import br.com.umdesenvolvedor.management_server.model.company.Company;
-import br.com.umdesenvolvedor.management_server.model.provider.Provider;
+import br.com.umdesenvolvedor.management_server.model.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
