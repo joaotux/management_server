@@ -1,5 +1,8 @@
 package br.com.umdesenvolvedor.management_server.resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,8 +41,20 @@ public class ProviderResource {
         String uuid = JwtDecoder.getUUID(token);
         name = name == null ? "%" : name;
 
-        Page<ProviderDTO> listDTO = service.list(name, active, pageable, uuid).map(p -> {
+        Page<ProviderDTO> listDTO = service.findAll(name, active, pageable, uuid).map(p -> {
             return ProviderDTO.toDTO(p);
+        });
+        return listDTO;
+    }
+
+    @GetMapping(value = {"list-no-page/{active}", "list-no-page/{name}/{active}"})
+    public List<ProviderDTO> list(@PathVariable(required = false) String name, @PathVariable boolean active,  @RequestHeader (name = "Authorization") String token) {
+        String uuid = JwtDecoder.getUUID(token);
+        name = name == null ? "%" : name;
+
+        List<ProviderDTO> listDTO = new ArrayList<>();
+        service.findAll(name, active, uuid).forEach(p -> {
+            listDTO.add(ProviderDTO.toDTO(p));
         });
         return listDTO;
     }

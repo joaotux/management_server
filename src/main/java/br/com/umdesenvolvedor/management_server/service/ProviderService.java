@@ -22,8 +22,12 @@ public class ProviderService {
     @Autowired
     private ProdutoctService products;
 
-    public Page<Provider> list(String name, boolean active, Pageable pageable, String uuid) {
+    public Page<Provider> findAll(String name, boolean active, Pageable pageable, String uuid) {
         return repository.findByNameAndCompanyIdAndIsActive(name, active, pageable, uuid);
+    }
+
+    public List<Provider> findAll(String name, boolean active, String uuid) {
+        return repository.findByNameAndCompanyIdAndIsActive(name, active, uuid);
     }
 
     public Optional<Provider> find(Long id, String uuid) {

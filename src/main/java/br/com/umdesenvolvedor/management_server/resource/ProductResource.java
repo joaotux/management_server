@@ -47,6 +47,13 @@ public class ProductResource {
         return service.findAll(uuid, query, pageable);
     }
 
+    @GetMapping(value = {"list-no-page", "list-no-page/{query}"})
+    public List<Product> findAll(@PathVariable(required = false) String query, @RequestHeader (name = "Authorization") String token) {
+        String uuid = JwtDecoder.getUUID(token);
+        query = query == null ? "%" : query;
+        return service.findAll(uuid, query);
+    }
+
     @GetMapping("{id}")
     public Product find(@PathVariable Long id, @RequestHeader (name = "Authorization") String token) {
         String uuid = JwtDecoder.getUUID(token);

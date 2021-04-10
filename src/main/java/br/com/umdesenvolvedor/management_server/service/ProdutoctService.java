@@ -25,7 +25,7 @@ public class ProdutoctService {
     }
 
     public Page<Product> findAll(String idCom, String query, Pageable pageable) {
-        return repository.find(idCom, query, pageable);
+        return repository.findAll(idCom, query, pageable);
     }
 
     public Optional<Product> find(Long id, String uuid) {
@@ -34,5 +34,9 @@ public class ProdutoctService {
 
     public Optional<Product> providerExist(Long id, String uuid) {
         return repository.providerExist(id, uuid);
+    }
+
+    public List<Product> findAll(String uuid, String query) {
+        return repository.findAll(uuid, query);
     }
 }
