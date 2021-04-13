@@ -1,4 +1,4 @@
-package br.com.umdesenvolvedor.management_server.resource;
+package br.com.umdesenvolvedor.management_server.web.resource;
 
 import javax.validation.Valid;
 

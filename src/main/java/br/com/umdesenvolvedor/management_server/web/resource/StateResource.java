@@ -1,7 +1,6 @@
-package br.com.umdesenvolvedor.management_server.resource;
+package br.com.umdesenvolvedor.management_server.web.resource;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

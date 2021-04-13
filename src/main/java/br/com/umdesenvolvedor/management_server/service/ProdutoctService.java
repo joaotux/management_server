@@ -39,4 +39,8 @@ public class ProdutoctService {
     public List<Product> findAll(String uuid, String query) {
         return repository.findAll(uuid, query);
     }
+
+    public void delete(Product product) {
+        repository.delete(product);
+    }
 }

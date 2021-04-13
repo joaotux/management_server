@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.cors().and()
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/company").permitAll()
+		.antMatchers(HttpMethod.GET, "/swagger").permitAll()
 		.antMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated().and()
 
 				// filtra requisições de login

@@ -1,4 +1,4 @@
-package br.com.umdesenvolvedor.management_server.resource;
+package br.com.umdesenvolvedor.management_server.web.resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class ProviderResource {
     }
 
     @GetMapping(value = {"list-no-page/{active}", "list-no-page/{name}/{active}"})
-    public List<ProviderDTO> list(@PathVariable(required = false) String name, @PathVariable boolean active,  @RequestHeader (name = "Authorization") String token) {
+    public List<ProviderDTO> list(@PathVariable(required = false) String name, @PathVariable boolean active, @RequestHeader (name = "Authorization") String token) {
         String uuid = JwtDecoder.getUUID(token);
         name = name == null ? "%" : name;
 

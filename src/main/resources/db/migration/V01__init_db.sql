@@ -290,6 +290,27 @@ CREATE TABLE IF NOT EXISTS `managementdb`.`phone` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `managementdb`.`service_application`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `managementdb`.`service_application` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(250) NOT NULL,
+  `code` VARCHAR(20) NULL,
+  `price_sales` DOUBLE NOT NULL,
+  `price_cost` DOUBLE NOT NULL,
+  `active` TINYINT NULL,
+  `id_comp` VARCHAR(36) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_service_company1_idx` (`id_comp` ASC),
+  CONSTRAINT `fk_service_company1`
+    FOREIGN KEY (`id_comp`)
+    REFERENCES `managementdb`.`company` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
